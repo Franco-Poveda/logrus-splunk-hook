@@ -14,15 +14,15 @@ type Hook struct {
 // client - splunk client instance (use NewClient)
 // level - log level
 func NewHook(client *Client, levels []logrus.Level) *Hook {
-
 	return &Hook{client, levels}
 }
 
 // Fire triggers a splunk event
 func (h *Hook) Fire(entry *logrus.Entry) error {
-	entry.Logger = nil
+	myEntry := entry
+	myEntry.Logger = nil
 	err := h.Client.Log(
-		entry,
+		myEntry,
 	)
 	return err
 }
