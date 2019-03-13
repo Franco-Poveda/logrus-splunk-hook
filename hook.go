@@ -19,6 +19,7 @@ func NewHook(client *Client, levels []logrus.Level) *Hook {
 
 // Fire triggers a splunk event
 func (h *Hook) Fire(entry *logrus.Entry) error {
+	//TODO: should I map more of these fields over? like err?
 	event := map[string]interface{}{
 		"message": entry.Message,
 		"time": entry.Time.String(),
