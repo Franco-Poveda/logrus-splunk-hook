@@ -23,7 +23,6 @@ func (h *Hook) Fire(entry *logrus.Entry) error {
 		"message": entry.Message,
 		"time": entry.Time.String(),
 		"level": entry.Level.String(),
-
 	}
 	for k, v := range entry.Data {
 		event[k] = v

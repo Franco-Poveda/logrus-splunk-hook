@@ -8,9 +8,6 @@ import (
 	"net/http"
 	"os"
 	"time"
-	"log"
-	"fmt"
-	"reflect"
 )
 
 // Event represents the log event object that is sent to Splunk when Client.Log is called.
@@ -116,12 +113,8 @@ func (c *Client) LogWithTime(t int64, event interface{}) error {
 // Client.LogEvent is used to POST a single event to the Splunk server.
 func (c *Client) LogEvent(e *Event) error {
 	// Convert requestBody struct to byte slice to prep for http.NewRequest
-	log.Println(fmt.Sprintf("LogEvent Event: %v", e))
- 	log.Println(fmt.Sprintf("LogEvent Event.Event %v", e.Event))
-	log.Println(fmt.Sprintf("LogEvent typeof Event.Event %v", reflect.TypeOf(e.Event)))
 	b, err := json.Marshal(e)
 	if err != nil {
-		log.Println(fmt.Sprintf("json Marshal error: %v", err))
 		return err
 	}
 	return c.doRequest(bytes.NewBuffer(b))
