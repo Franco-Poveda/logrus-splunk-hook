@@ -12,12 +12,12 @@ import (
 
 // Event represents the log event object that is sent to Splunk when Client.Log is called.
 type Event struct {
-	Time       int64       `json:"time" binding:"required"`       // epoch time in seconds
-	Host       string      `json:"host" binding:"required"`       // hostname
-	Source     string      `json:"source" binding:"required"`     // app name
-	SourceType string      `json:"sourcetype" binding:"required"` // Splunk bucket to group logs in
-	Index      string      `json:"index" binding:"required"`      // idk what it does..
-	Event      interface{} `json:"event" binding:"required"`      // throw any useful key/val pairs here
+	Time       int64       `json:"time" binding:"required"`                 // epoch time in seconds
+	Host       string      `json:"host,omitempty" binding:"required"`       // hostname
+	Source     string      `json:"source,omitempty" binding:"required"`     // app name
+	SourceType string      `json:"sourcetype,omitempty" binding:"required"` // Splunk bucket to group logs in
+	Index      string      `json:"index,omitempty" binding:"required"`      // idk what it does..
+	Event      interface{} `json:"event" binding:"required"`                // throw any useful key/val pairs here
 }
 
 // Client manages communication with Splunk's HTTP Event Collector.
