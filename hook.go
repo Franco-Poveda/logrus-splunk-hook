@@ -20,8 +20,14 @@ func NewHook(client *Client, levels []logrus.Level) *Hook {
 
 // Fire triggers a splunk event
 func (h *Hook) Fire(entry *logrus.Entry) error {
-	err := h.Client.Log(
-		entry,
+	preparedEntry, err := entry.String()
+
+	if err != nil {
+		return err
+	}
+
+	err = h.Client.Log(
+		preparedEntry,
 	)
 	return err
 }
